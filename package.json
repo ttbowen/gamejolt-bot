@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Game Jolt Bot framework.",
   "main": "dist/index",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "build": "gulp",
     "lint": "gulp ts-lint"
