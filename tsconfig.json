@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": false,
+        "module": "commonjs",
+        "target": "es6",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "removeComments": false,
+        "declaration": true,
+        "outDir": "lib",
+        "lib": [
+            "es7"
+        ],
+        "rootDir": ".",
+        "experimentalDecorators": true
+    },
+    "exclude": [
+        "node_modules",
+        "docs",
+        "tmp"
+    ]
+}

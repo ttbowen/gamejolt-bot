@@ -1,0 +1,39 @@
+{
+  "name": "gamejolt-bot",
+  "version": "0.1.0",
+  "description": "Game Jolt Bot framework.",
+  "main": "dist/index",
+  "scripts": {
+    "build": "gulp",
+    "lint": "gulp ts-lint"
+  },
+  "author": "Thomas Bowen <ttbowen11@hotmail.co.uk>",
+  "license": "ISC",
+  "dependencies": {
+    "gamejolt.js": "git+https://github.com/bowenwaregames/gamejolt.js.git",
+    "glob": "^7.1.2",
+    "gulp": "^3.9.1",
+    "limiter": "^1.1.2",
+    "nconf": "^0.8.4",
+    "pg": "^6.4.0",
+    "pg-hstore": "^2.3.2",
+    "redis": "^2.7.1",
+    "reflect-metadata": "^0.1.10",
+    "sequelize": "^4.2.1"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.0",
+    "@types/glob": "^5.0.30",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^7.0.27",
+    "chai": "^4.0.1",
+    "del": "^2.2.2",
+    "gulp-mocha": "^4.3.1",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-tslint": "^8.1.0",
+    "gulp-typescript": "^3.1.7",
+    "mocha": "^3.4.2",
+    "tslint": "^5.4.2",
+    "typescript": "^2.3.4"
+  }
+}
