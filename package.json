@@ -6,7 +6,12 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "build": "gulp",
-    "lint": "gulp ts-lint"
+    "lint": "gulp ts-lint",
+    "postinstall": "postinstall-build --only-as-dependency bin \"npm run build -s\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bowenwaregames/gamejolt-bot.git"
   },
   "author": "Thomas Bowen <ttbowen11@hotmail.co.uk>",
   "license": "ISC",
