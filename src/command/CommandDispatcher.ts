@@ -172,9 +172,9 @@ export class CommandDispatcher<T extends Client> {
             if (globalLimit && globalLimit.isRateLimited && globalLimit.wasNotified) return;
             rateLimit.setNotified();
             if (!command)
-                message.reply(`Global cooldown. Try again in ${TimeUtil.difference(globalLimit.expires, Date.now()).toString()}`);
+                message.reply(`Global cooldown. Try again in ${TimeUtil.difference(rateLimit.expires, Date.now()).toString()}`);
             else
-                message.reply(`Command cooldown. Try again in ${TimeUtil.difference(globalLimit.expires, Date.now()).toString()}`);
+                message.reply(`Command cooldown. Try again in ${TimeUtil.difference(rateLimit.expires, Date.now()).toString()}`);
         }
         return false;
     }
