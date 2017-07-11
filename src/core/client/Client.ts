@@ -210,6 +210,18 @@ export class Client extends GameJolt.Client {
         this.login(config.username, config.password);
         return this;
     }
+    
+
+    /**
+     * 
+     * Get room prefix
+     * @param {number} roomId 
+     * @returns {Promise<string>} 
+     * @memberof Client
+     */
+    public async getPrefix(roomId: number): Promise<string> {
+       return await this._redis.get(`prefix::${roomId}`);
+    }
 
 
     /**
