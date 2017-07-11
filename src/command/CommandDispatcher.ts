@@ -62,6 +62,11 @@ export class CommandDispatcher<T extends Client> {
             return;
         }
 
+        if (await this._client.isQuiet(message.roomId) && 
+            command.type !== 'moderation' && command.type !== 'manage') return;
+    
+        if (await this._client.isSerious(message.roomId) && command.type === 'fun') return;
+
         let hasPermission = this.checkPermissions(command, message);
         if (!hasPermission) return;
 

@@ -177,6 +177,29 @@ export class Client extends GameJolt.Client {
 
         registerListeners(this);
     }
+    
+
+    /**
+     * 
+     * Check if the bot is in quiet mode
+     * @param {number} roomId 
+     * @returns {Promise<boolean>} 
+     * @memberof Client
+     */
+    public async isQuiet(roomId: number): Promise<boolean> {
+        return await this._redis.get(`mode::${roomId}`) === 'quiet';
+    }
+
+    /**
+     * 
+     * Check if the bot is in serious mode
+     * @param {number} roomId 
+     * @returns {Promise<boolean>} 
+     * @memberof Client
+     */
+    public async isSerious(roomId: number): Promise<boolean> {
+        return await this._redis.get(`mode::${roomId}`) === 'serious';
+    }
 
     /**
      * Checks if the passed user is an owners
@@ -221,6 +244,22 @@ export class Client extends GameJolt.Client {
      */
     public async getPrefix(roomId: number): Promise<string> {
        return await this._redis.get(`prefix::${roomId}`);
+    }
+    
+
+    /**
+     * 
+     * Get the current room mode
+     * @param {number} roomId 
+     * @returns {promise<string>} 
+     * @memberof Client
+     */
+    public async getCurrentMode(roomId: number): Promise<string> {
+       let exists = await this._redis.keyExists(`mode::${roomId}`);  
+
+       if (exists[0] === 1) 
+           return await this._redis.get(`mode::${roomId}`);
+       else return 'serious';
     }
 
 
