@@ -36,8 +36,10 @@ export default class extends Command {
 
             // Find by type if cannot be found by name 
             if (!command) {
-                let commands: Collection<string, Command> = this.client.commands.findByType(commandName);
-
+                let commands: Collection<string, Command> = this.client.commands.findByType(commandName)
+                                      .filter(c => !(!this.client.isOwner(message.user) && c.ownerOnly))
+                                      .filter(c => message.user.permissionLevel >= c.permissionLevels );
+ 
                 if (commands.size > 0) {
                     let commandsList: string = commands.map(c =>
                         `\n\`${c.name}\` : ${c.description}`)
