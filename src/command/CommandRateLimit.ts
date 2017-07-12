@@ -38,7 +38,7 @@ export class CommandRateLimit {
     public call(): boolean {
         if (this.expires < Date.now()) this._reset();
         if (this._count >= this._limit) return false;
-        this._count++; console.log(this._count);
+        this._count++;
         if (this._count === 1) this.expires = Date.now() + this._duration;
         return true;
     }
