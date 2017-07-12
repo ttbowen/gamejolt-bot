@@ -122,8 +122,8 @@ export class CommandDispatcher<T extends Client> {
         const prefixes: string[] = [`!`];
         const pm: boolean = message.room.type === 'pm';
 
-        if (await this._redis.get(`prefix::${message.roomId}`)) {
-            prefixes.push(await this._redis.get(`prefix::${message.roomId}`));
+        if (await this._client.getPrefix(message.roomId)) {
+            prefixes.push(await this._client.getPrefix(message.roomId));
         }
 
         let prefix: string = prefixes.find(a => message.contentRaw.trim().startsWith(a));
