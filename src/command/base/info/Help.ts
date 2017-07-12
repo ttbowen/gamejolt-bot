@@ -11,17 +11,14 @@ export default class extends Command {
             description: 'Get command help.',
             usage: '<prefix> help',
             extraHelp: '',
-            type: 'info'
+            type: 'info',
+            pmOnly: true
         });
     }
 
     public async invoke(message: Message, [commandName]: [string]): Promise<void> {
         let command: Command;
         let output: string;
-
-        const pm: boolean = message.room.type === 'pm';
-
-        if (!pm && !this.client.isOwner(message.user)) return;
 
         if (!commandName) {
 

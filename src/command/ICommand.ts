@@ -21,6 +21,7 @@ export interface ICommand<T extends Client> {
     argSeparator: string
     permissionLevels: Permissions[];
     ownerOnly: boolean;  
+    pmOnly: boolean;
     rateLimiter: CommandRateLimiter;
     invoke(message: Message, args?: any[]): void;
     register(client: T): void;

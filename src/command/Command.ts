@@ -124,6 +124,16 @@ export abstract class Command<T extends Client = Client> implements ICommand<T> 
      */
     public middleware: Middleware[];
 
+    
+    /**
+     * 
+     * Specifies if the command can only
+     * be used in Private chats
+     * @type {boolean}
+     * @memberof Command
+     */
+    public pmOnly: boolean;
+
     protected _redis: RedisProvider;
 
     /**
@@ -150,6 +160,7 @@ export abstract class Command<T extends Client = Client> implements ICommand<T> 
         this.argSeparator = info.argSeparator || ',';
         this.aliases = info.aliases || [];
         this.ownerOnly = info.ownerOnly || false;
+        this.pmOnly = false || info.pmOnly;
         this.middleware = [];
         this.client = null;
         this._redis = RedisProvider.instance();

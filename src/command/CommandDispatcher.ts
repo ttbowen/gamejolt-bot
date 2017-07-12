@@ -62,6 +62,8 @@ export class CommandDispatcher<T extends Client> {
             return;
         }
 
+        if (command.pmOnly && !pm) return message.reply('This is a pm only command.');
+
         if (await this._client.isQuiet(message.roomId) && 
             command.type !== 'moderation' && command.type !== 'manage') return;
     

@@ -12,6 +12,7 @@ import { Permissions } from './Permissions';
  * @property {CommandTypes} [type] The command type
  * @property {string} [extraHelp] Extra command help
  * @property {boolean} [ownerOnly] Owner only command
+ * @property {boolean} [pmOnly] Private message command only
  * @property {string[]} [aliases]  Alternative names for command
  * @property {string} [argSeparator] Character to separate args by
  */
@@ -23,6 +24,7 @@ export type CommandOptions =  {
     type: CommandTypes;
     extraHelp?: string;
     ownerOnly?: boolean;
+    pmOnly?: boolean;
     aliases?: string[];
     argSeparator?: string;
     rateLimit?: [number, number];
