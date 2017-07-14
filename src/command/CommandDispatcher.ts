@@ -51,9 +51,10 @@ export class CommandDispatcher<T extends Client> {
      */
     private async handleMessage(message: Message): Promise<void> {
         if (!this._ready) return;
-
+    
         if (message.user.id === this._client.clientUser.id) return;
-
+        
+        const owner = await this._client.isOwner(message.user);
         const [commandCalled, command, prefix, name]: [boolean, Command<T>, string, string] = await this.isCommandCalled(message);
 
         const pm: boolean = message.room.type === 'pm';
@@ -62,7 +63,7 @@ export class CommandDispatcher<T extends Client> {
             return;
         }
 
-        if (command.pmOnly && !pm && !this._client.isOwner(message.user)) return message.reply('This is a pm only command.');
+        if (command.pmOnly && !pm && !owner) return message.reply('This is a pm only command.');
 
         if (await this._client.isQuiet(message.roomId) && 
             command.type !== 'moderation' && command.type !== 'manage') return;
@@ -79,7 +80,7 @@ export class CommandDispatcher<T extends Client> {
             .map(a => a.trim())
             .filter(a => a !== '')
 
-        if (command.ownerOnly && !this._client.isOwner(message.user)) return;
+        if (command.ownerOnly && !owner) return;
 
         if (!this._checkRateLimits(message, command)) return;
 
@@ -152,7 +153,7 @@ export class CommandDispatcher<T extends Client> {
         let passedCommand: boolean = true;
         let passedRateLimiters: boolean = true;
 
-        if (!this._checkRateLimiter(message)) passedCommand = false;
+        if (!this._checkRateLimiter(message)) passedGlobal = false;
         if (!this._checkRateLimiter(message, command)) passedCommand = false;
         if (!passedGlobal || !passedCommand) passedRateLimiters = false;
 
