@@ -1,4 +1,4 @@
-import { Message, SiteUser } from 'gamejolt.js';
+import { Message, SiteUser, User } from 'gamejolt.js';
 import { Command } from '../../Command';
 import { resolve } from '../../middleware/Resolve';
 import { expect } from '../../middleware/Expect';
@@ -23,6 +23,9 @@ export default class extends Command {
         // Make sure the bot cant ignore itself or caller
         if (message.user.id === user.id) return message.reply('You cannot blacklist yourself.');
         if (this.client.clientUser.id === user.id) return message.reply('You cannot blacklist me.');
+
+        let usr: User = new User(null, { id: user.id });
+        if (await this.client.isOwner(usr)) return message.reply('You cannot ignore bot owners.');
 
         // Check for global blacklist
         if (global === 'global') {
