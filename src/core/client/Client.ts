@@ -116,6 +116,7 @@ export class Client extends GameJolt.Client {
 
     public readonly rateLimiter: CommandRateLimiter;
     public readonly middleware: Middleware[];
+    public readonly defaultPrefix: string;
 
     @consoleLogger private readonly _logger: ConsoleLogger;
     private readonly _commandDispatcher: CommandDispatcher<this>;
@@ -133,6 +134,7 @@ export class Client extends GameJolt.Client {
      * @param {string} [commandsDir] Directory command modules are located
      * @param {string} [configPath] Path to bot configurations
      * @param {number[]} [defaultRooms] Default rooms to join on startup
+     * @param {string} [defaultPrefix] Default bot prefix
      * @param {string} [name] The name of the bot
      * @param {number[]} [ownerIds] Owner user Id numbers
      * @param {string} [version] The current bot version
@@ -154,6 +156,7 @@ export class Client extends GameJolt.Client {
         this.configPath = botOptions.configPath ? path.resolve(botOptions.configPath) : null;
         this.version = botOptions.version || '0.0.0';
         this.middleware = [];
+        this.defaultPrefix = botOptions.defaultPrefix || '!';
         this.commands = new CommandStorage<this, string, Command<this>>();
         this.pause = botOptions.pause || false;
         this.owners = botOptions.ownerIds instanceof Array ?
@@ -243,7 +246,7 @@ export class Client extends GameJolt.Client {
      * @memberof Client
      */
     public async getPrefix(roomId: number): Promise<string> {
-       return await this._redis.get(`prefix::${roomId}`);
+       return await this._redis.get(`prefix::${roomId}`) || this.defaultPrefix;
     }
     
 

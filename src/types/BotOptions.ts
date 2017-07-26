@@ -21,6 +21,7 @@ export type BotOptions =  {
     commandsDir: string;
     configPath: string;
     defaultRooms?: number[];
+    defaultPrefix?: string;
     acceptFriendRequests?: boolean
     acceptFriendRequestInterval?: number;
     rateLimitInterval?: [ number, number ];
