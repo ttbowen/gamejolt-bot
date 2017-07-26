@@ -50,11 +50,11 @@ export default class extends Command {
                 } else
                     return message.reply(`'${commandName}' is not a valid command name or type.`);
             } else {
-                output = `\`\`\`\rCommand: ${command.name}\r
-                           \rDescription: ${command.description}\r
-                           \rUsage: ${command.usage.replace(/<prefix> /g, await this.client.getPrefix(message.roomId))}\r
-                           \rType: ${command.type}\r
-                           \rAliases: ${command.aliases.join(', ')}\r\`\`\``
+                output = `\n\`\`\`\rCommand: ${command.name}\r
+                          \rDescription: ${command.description}\r
+                          \rUsage: ${command.usage.replace(/<prefix> /g, await this.client.getPrefix(message.roomId))}\r
+                          \rType: ${command.type}\r
+                          \rAliases: ${command.aliases.join(', ')}\r\`\`\``
             }
         }
         return message.reply(output);
