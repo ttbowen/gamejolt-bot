@@ -10,7 +10,8 @@ export default class extends Command {
             description: 'Change the bot mode.',
             usage: '<prefix> mode <MODE>',
             type: 'manage',
-            permissionLevels: [ Permissions.ROOM_MODERATOR ]
+            permissionLevels: [ Permissions.ROOM_MODERATOR ],
+            ignoreCooldown: true
         });
     }
 

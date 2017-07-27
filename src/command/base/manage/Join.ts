@@ -12,7 +12,8 @@ export default class extends Command {
             usage: '<prefix> joinroom [room name|id]',
             type: 'manage',
             aliases: ['join', 'enter'],
-            ownerOnly: true
+            ownerOnly: true,
+            ignoreCooldown: true
         });
     }
 

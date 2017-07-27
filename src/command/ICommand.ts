@@ -23,6 +23,7 @@ export interface ICommand<T extends Client> {
     ownerOnly: boolean;  
     pmOnly: boolean;
     rateLimiter: CommandRateLimiter;
+    ignoreCooldown: boolean;
     invoke(message: Message, args?: any[]): void;
     register(client: T): void;
 }

@@ -13,7 +13,8 @@ export default class extends Command {
             usage: '<prefix> blacklist [username]',
             aliases: ['bl', 'ignore'],
             type: 'moderation',
-            permissionLevels: [Permissions.ROOM_MODERATOR]
+            permissionLevels: [Permissions.ROOM_MODERATOR],
+            ignoreCooldown: true
         });
     }
 

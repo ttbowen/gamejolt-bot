@@ -134,6 +134,16 @@ export abstract class Command<T extends Client = Client> implements ICommand<T> 
      */
     public pmOnly: boolean;
 
+    
+    /**
+     * 
+     * Specifies whether the cooldown should be ignored
+     * for this command
+     * @type {boolean}
+     * @memberof Command
+     */
+    public ignoreCooldown: boolean;
+
     protected _redis: RedisProvider;
 
     /**
@@ -161,6 +171,7 @@ export abstract class Command<T extends Client = Client> implements ICommand<T> 
         this.aliases = info.aliases || [];
         this.ownerOnly = info.ownerOnly || false;
         this.pmOnly = false || info.pmOnly;
+        this.ignoreCooldown = false || info.ignoreCooldown;
         this.middleware = [];
         this.client = null;
         this._redis = RedisProvider.instance();

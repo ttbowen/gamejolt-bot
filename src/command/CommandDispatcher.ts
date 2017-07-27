@@ -82,7 +82,9 @@ export class CommandDispatcher<T extends Client> {
 
         if (command.ownerOnly && !owner) return;
 
-        if (!this._checkRateLimits(message, command)) return;
+        if (!command.ignoreCooldown) {
+            if (!this._checkRateLimits(message, command)) return;
+        }
 
         if (await this.isBlacklisted(message.user, message)) return;
 

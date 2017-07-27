@@ -10,7 +10,8 @@ export default class extends Command {
             usage: '<prefix> leaveroom',
             type: 'manage',
             aliases: [ 'leave', 'gtfo' ],
-            permissionLevels: [ Permissions.ROOM_MODERATOR ]
+            permissionLevels: [ Permissions.ROOM_MODERATOR ],
+            ignoreCooldown: true
         });
     }
 

@@ -10,7 +10,8 @@ export default class extends Command {
             usage: '<prefix> setprefix [prefix]',
             aliases: [ 'sp' ],
             type: 'manage',
-            ownerOnly: true
+            ownerOnly: true,
+            ignoreCooldown: true
         });
     }
 

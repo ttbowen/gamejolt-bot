@@ -10,7 +10,8 @@ export default class extends Command {
             usage: '<prefix> reload [command]',
             type: 'manage',
             aliases: ['r'],
-			ownerOnly: true
+            ownerOnly: true,
+            ignoreCooldown: true
         });
     }
 

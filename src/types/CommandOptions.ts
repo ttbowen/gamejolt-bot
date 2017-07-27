@@ -15,6 +15,7 @@ import { Permissions } from './Permissions';
  * @property {boolean} [pmOnly] Private message command only
  * @property {string[]} [aliases]  Alternative names for command
  * @property {string} [argSeparator] Character to separate args by
+ * @property {boolean} [ignoreCooldown] Ignore the cooldown
  */
 export type CommandOptions =  {
     name: string;
@@ -28,4 +29,5 @@ export type CommandOptions =  {
     aliases?: string[];
     argSeparator?: string;
     rateLimit?: [number, number];
+    ignoreCooldown?: boolean;
 }

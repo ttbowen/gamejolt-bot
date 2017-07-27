@@ -14,6 +14,7 @@ export default class extends Command {
             aliases: ['wl', 'unignore'],
             type: 'moderation',
             permissionLevels: [Permissions.ROOM_MODERATOR],
+            ignoreCooldown: true
         });
     }
 
