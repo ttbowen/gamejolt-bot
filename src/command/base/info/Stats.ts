@@ -11,6 +11,7 @@ export default class extends Command {
             extraHelp: [{
                 commandName: 'online',
                 description: 'Get the number of users online.',
+                args: '<prefix> stats online'
             }],
             type: 'info',
         });

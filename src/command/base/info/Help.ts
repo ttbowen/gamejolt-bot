@@ -18,6 +18,7 @@ export default class extends Command {
     public async invoke(message: Message, [commandName, subCommandName]: [string, string]): Promise<void> {
         let command: Command;
         let output: string;
+        let prefix: string = await this.client.getPrefix(message.roomId);
 
         if (!commandName) {
 
@@ -52,7 +53,7 @@ export default class extends Command {
 
                 output = `\n\`\`\`\rCommand: ${command.name}\r
                           \rDescription: ${command.description}\r
-                          \rUsage: ${command.usage.replace(/<prefix> /g, await this.client.getPrefix(message.roomId))}\r
+                          \rUsage: ${command.usage.replace(/<prefix> /g, prefix)}\r
                           \rType: ${command.type}\r
                           \rAliases: ${command.aliases.join(', ')}\r\`\`\``
             } else {
@@ -61,7 +62,7 @@ export default class extends Command {
                     if (command.extraHelp[c].commandName === subCommandName) {
                         output = `\n\`\`\`\rCommand: ${command.extraHelp[c].commandName}\r
                                   \rDescription: ${command.extraHelp[c].description}\r
-                                  \rUsage: ${command.extraHelp[c].args}\r\`\`\``;
+                         \rUsage: ${command.extraHelp[c].args.replace(/<prefix> /g, prefix) }\r\`\`\``;
                         break;
                     }
                 }

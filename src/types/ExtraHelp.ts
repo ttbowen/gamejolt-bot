@@ -9,5 +9,5 @@
 export type ExtraHelp = {
     commandName: string,
     description: string,
-    args?: string
+    args: string
 }
