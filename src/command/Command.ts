@@ -8,6 +8,7 @@ import { Permissions } from '../types/Permissions';
 import { ICommand } from './ICommand';
 import { Middleware } from '../types/Middleware';
 import { RedisProvider } from '../storage/database/RedisProvider';
+import { ExtraHelp } from '../types/ExtraHelp';
 
 import { Message, User } from 'gamejolt.js';
 
@@ -50,6 +51,15 @@ export abstract class Command<T extends Client = Client> implements ICommand<T> 
      * @memberof Command
      */
     public usage: string;
+    
+
+    /**
+     * 
+     * Extra command help for sub commands
+     * @type {ExtraHelp[]}
+     * @memberof Command
+     */
+    public extraHelp: ExtraHelp[]
 
 
     /**
@@ -167,6 +177,7 @@ export abstract class Command<T extends Client = Client> implements ICommand<T> 
         this.type = info.type;
         this.permissionLevels = info.permissionLevels || [Permissions.USER];
         this.usage = info.usage;
+        this.extraHelp = info.extraHelp || [];
         this.argSeparator = info.argSeparator || ',';
         this.aliases = info.aliases || [];
         this.ownerOnly = info.ownerOnly || false;

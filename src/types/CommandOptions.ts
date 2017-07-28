@@ -1,5 +1,6 @@
 import { CommandTypes } from './CommandTypes';
 import { Permissions } from './Permissions';
+import { ExtraHelp } from './ExtraHelp';
 
 /**
  * Options that are provided to a Command
@@ -10,7 +11,7 @@ import { Permissions } from './Permissions';
  * @property {string} [usage] Usage instructions for command
  * @property {number} [permissionLevel] Command permission level
  * @property {CommandTypes} [type] The command type
- * @property {string} [extraHelp] Extra command help
+ * @property {ExtraHelp} [extraHelp] Extra command help
  * @property {boolean} [ownerOnly] Owner only command
  * @property {boolean} [pmOnly] Private message command only
  * @property {string[]} [aliases]  Alternative names for command
@@ -23,7 +24,7 @@ export type CommandOptions =  {
     usage: string;
     permissionLevels?: Permissions[];
     type: CommandTypes;
-    extraHelp?: string;
+    extraHelp?: ExtraHelp[];
     ownerOnly?: boolean;
     pmOnly?: boolean;
     aliases?: string[];

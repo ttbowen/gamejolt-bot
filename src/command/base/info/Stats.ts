@@ -6,14 +6,21 @@ export default class extends Command {
     public constructor() {
         super({
             name: 'stats',
-            description: 'Sends back a pong response.',
-            usage: '<prefix> stats [online]',
+            description: 'Get chat, site and bot stats.',
+            usage: '<prefix> stats <online>',
+            extraHelp: [{
+                commandName: 'online',
+                description: 'Get the number of users online.',
+            }],
             type: 'info',
         });
     }
 
     public async invoke(message: Message, [command]: [string]): Promise<void> {
+        if (!command) return message.reply('Please enter a command. Use `help stats` for more help');
+
         command = command.toLowerCase();
+        
         if (command === 'online') {
             return message.reply(`There are currently **${this.client.chat.userCount}** user's online.`);
         }
