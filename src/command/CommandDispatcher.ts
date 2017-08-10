@@ -86,7 +86,7 @@ export class CommandDispatcher<T extends Client> {
             if (!this._checkRateLimits(message, command)) return;
         }
 
-        if (await this.isBlacklisted(message.user, message)) return;
+        if (await this._client.isBlacklisted(message.user, message.roomId)) return;
 
         let middlewarePassed: boolean = true;
         let middleware: Middleware[] = this._client.middleware.concat(command.middleware);
@@ -204,23 +204,6 @@ export class CommandDispatcher<T extends Client> {
             }
         }
         return permissions;
-    }
-
-    private async isBlacklisted(user: User, message: Message): Promise<boolean> {
-        let roomitems: any = await this._redis.listRange(`blacklist::${message.roomId}`, 0, -1);
-
-        for (let item of roomitems[0].entries()) {
-            let id: string = user.id.toString();
-            if (item[1] === id) return true;
-        }
-
-        let globalitems: any = await this._redis.listRange(`blacklist::global`, 0, -1);
-
-        for (let item of globalitems[0].entries()) {
-            let id: string = user.id.toString();
-            if (item[1] === id) return true;
-        }
-        return false
     }
 
     /**

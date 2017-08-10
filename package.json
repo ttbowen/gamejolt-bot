@@ -1,6 +1,6 @@
 {
   "name": "gamejolt-bot",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Game Jolt Bot framework.",
   "main": "dist/index",
   "typings": "dist/index.d.ts",

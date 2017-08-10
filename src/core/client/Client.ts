@@ -180,7 +180,7 @@ export class Client extends GameJolt.Client {
 
         registerListeners(this);
     }
-    
+
 
     /**
      * 
@@ -236,7 +236,7 @@ export class Client extends GameJolt.Client {
         this.login(config.username, config.password);
         return this;
     }
-    
+
 
     /**
      * 
@@ -246,9 +246,9 @@ export class Client extends GameJolt.Client {
      * @memberof Client
      */
     public async getPrefix(roomId: number): Promise<string> {
-       return await this._redis.get(`prefix::${roomId}`) || this.defaultPrefix;
+        return await this._redis.get(`prefix::${roomId}`) || this.defaultPrefix;
     }
-    
+
 
     /**
      * 
@@ -258,11 +258,11 @@ export class Client extends GameJolt.Client {
      * @memberof Client
      */
     public async getCurrentMode(roomId: number): Promise<string> {
-       let exists = await this._redis.keyExists(`mode::${roomId}`);  
+        let exists = await this._redis.keyExists(`mode::${roomId}`);
 
-       if (exists[0] === 1) 
-           return await this._redis.get(`mode::${roomId}`);
-       else return 'serious';
+        if (exists[0] === 1)
+            return await this._redis.get(`mode::${roomId}`);
+        else return 'serious';
     }
 
 
@@ -337,6 +337,39 @@ export class Client extends GameJolt.Client {
         if (fs.existsSync(this.configPath)) {
             nconf.defaults(require(configPath));
         }
+    }
+
+    /**
+     * Checks if the user is blacklisted
+     * @param {User} user 
+     * @param {number} [roomId] 
+     * @returns {Promise<boolean>} 
+     * @memberof Client
+     */
+    public async isBlacklisted(user: User, roomId?: number): Promise<boolean> {
+
+        if (roomId) {
+            let roomitems: any = await this._redis.listRange(`blacklist::${roomId}`, 0, -1);
+            roomitems = roomitems[0];
+
+            for (let item of roomitems.entries()) {
+                let id: string = item[1];
+
+                if (id === user.id.toString())
+                    return true;
+            } 
+        }
+
+        let globalitems: any = await this._redis.listRange(`blacklist::global`, 0, -1);
+        globalitems = globalitems[0];
+
+        for (let item of globalitems.entries()) {
+            let id: string = item[1];
+
+            if (id === user.id.toString()) 
+                return true;
+        }
+        return false
     }
 
     //#region Gamejolt.js events
