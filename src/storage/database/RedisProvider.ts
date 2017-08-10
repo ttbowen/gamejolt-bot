@@ -232,5 +232,38 @@ export class RedisProvider {
             .catch((err) => {
                 this.logger.error('redis', 'Error:' + err);
             });
+    }  
+
+    /**
+     * 
+     * Save a hash to redis
+     * @param {string} hash 
+     * @param {*} object 
+     * @returns {Promise<any>} 
+     * @memberof RedisProvider
+     */
+    public async hmset(hash: string, object: any): Promise<any> {
+        return this.client.multi()
+            .hmset(hash, object)
+            .execAsync()
+            .catch((err) => {
+                this.logger.error('redis', 'Error:' + err);
+            });  
+    }
+
+    /**
+     * 
+     * Retrieve a hash from redis
+     * @param {string} hash 
+     * @returns {Promise<any>} 
+     * @memberof RedisProvider
+     */
+    public async hget(hash: string): Promise<any> {
+        return this.client.multi()
+            .hgetall(hash)
+            .execAsync()
+            .catch((err) => {
+                this.logger.error('redis', 'Error:' + err);
+            });  
     }
 }
