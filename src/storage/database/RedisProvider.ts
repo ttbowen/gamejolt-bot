@@ -85,6 +85,25 @@ export class RedisProvider {
 
     /**
      * 
+     * Get redis keys.
+     * @param {string} [pattern] 
+     * @returns {Promise<any>} 
+     * @memberof RedisProvider
+     */
+    public async keys(pattern?: string): Promise<any> {
+        if (!pattern) pattern = '*';
+
+        return this.client.multi()
+            .keys(pattern)
+            .execAsync()
+            .catch((err) => {
+                this.logger.error('redis', 'Error:' + err);
+            });
+    }
+
+
+    /**
+     * 
      * Get a redis key
      * @param {string} key 
      * @returns {Promise<any>} 
@@ -232,7 +251,7 @@ export class RedisProvider {
             .catch((err) => {
                 this.logger.error('redis', 'Error:' + err);
             });
-    }  
+    }
 
     /**
      * 
@@ -248,7 +267,7 @@ export class RedisProvider {
             .execAsync()
             .catch((err) => {
                 this.logger.error('redis', 'Error:' + err);
-            });  
+            });
     }
 
     /**
@@ -264,6 +283,22 @@ export class RedisProvider {
             .execAsync()
             .catch((err) => {
                 this.logger.error('redis', 'Error:' + err);
-            });  
+            });
+    }
+
+    /**
+     * 
+     * Get all fields from redis hash
+     * @param {string} key 
+     * @returns {Promise<any>} 
+     * @memberof RedisProvider
+     */
+    public async hgetall(key: string): Promise<any> {
+        return this.client.multi()
+            .hgetall(key)
+            .execAsync()
+            .catch((err) => {
+                this.logger.error('redis', 'Error:' + err);
+            });
     }
 }
