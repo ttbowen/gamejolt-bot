@@ -21,6 +21,8 @@ export default class extends Command {
     @using(resolve({ '<user>': 'SiteUser' }))
     public async invoke(message: Message, [user, global]: [User, string]): Promise<void> {
 
+        if (!user) return message.reply(`Could not find this user.`);
+
         // Check for global blacklist
         if (global === 'global') {
             global = global.toLowerCase();

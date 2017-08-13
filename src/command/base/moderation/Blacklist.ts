@@ -21,6 +21,8 @@ export default class extends Command {
     @using(resolve({ '<user>': 'SiteUser' }))
     public async invoke(message: Message, [user, global]: [SiteUser, string]): Promise<void> {
 
+        if (!user) return message.reply(`Could not find this user.`);
+
         // Make sure the bot cant ignore itself or caller
         if (message.user.id === user.id) return message.reply('You cannot blacklist yourself.');
         if (this.client.clientUser.id === user.id) return message.reply('You cannot blacklist me.');
