@@ -15,7 +15,7 @@ export type ResolveArgTypeNames = 'User' | 'Room' | 'String' | 'Number' | 'Any' 
 
 /**
  * 
- * 
+ * Resolve various types passed to middleware function
  * @export
  * @template T 
  * @param {{ [name: string]: ArgTypeNames }} argTypes 
@@ -41,7 +41,10 @@ export function resolve<T extends Command>(argTypes: { [name: string]: ResolveAr
 
                 try {
                     let cmd: T = this;
-                    user = await cmd.client.api.getUser(arg);
+                    if (arg)
+                        user = await cmd.client.api.getUser(arg);
+                    else
+                        user = null;
                 } catch (ex) { console.log(ex); }
 
                 args[index] = user;
@@ -76,7 +79,6 @@ export function resolve<T extends Command>(argTypes: { [name: string]: ResolveAr
                 args[index] = parseFloat(arg);
             }
         }
-        console.log([message, args]);
         return [message, args];
     };
 }
