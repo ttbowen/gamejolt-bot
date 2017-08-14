@@ -21,7 +21,18 @@ export default class extends Command {
     @using(resolve({ '<user>': 'SiteUser' }))
     public async invoke(message: Message, [user, global]: [SiteUser, string]): Promise<void> {
 
-        if (!user) return message.reply(`Could not find this user.`);
+        if (!user) {
+            let users: string = '\n';
+            let blacklisted = await this._redis.listRange(`blacklist::${message.room.id}`, 0, -1);
+            blacklisted = blacklisted[0];
+
+            for (let id of blacklisted) {
+                let user: SiteUser = await this.client.api.getUser(parseInt(id));
+                users += user.username;
+                users += '\n';
+            }
+            return message.reply(users);
+        }
 
         // Make sure the bot cant ignore itself or caller
         if (message.user.id === user.id) return message.reply('You cannot blacklist yourself.');
