@@ -70,7 +70,7 @@ export class CommandDispatcher<T extends Client> {
     
         if (await this._client.isSerious(message.roomId) && command.type === 'fun') return;
 
-        let hasPermission = this.checkPermissions(command, message);
+        let hasPermission = this.checkPermissions(command, message) || owner;
         if (!hasPermission) return;
 
         let args: string[] = message.contentRaw
