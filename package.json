@@ -7,7 +7,8 @@
   "scripts": {
     "postinstall": "postinstall-build --only-as-dependency bin \"npm run build -s\"",
     "build": "gulp",
-    "lint": "gulp lint"
+    "lint": "tslint src/**/*.ts",
+    "lint:fix": "tslint --fix src/**/*.ts"
   },
   "repository": {
     "type": "git",
