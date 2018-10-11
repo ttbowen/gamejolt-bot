@@ -9,7 +9,8 @@
     "build": "gulp",
     "lint": "tslint src/**/*.ts",
     "lint:fix": "tslint --fix src/**/*.ts",
-    "precommit": "pretty-quick --staged"
+    "precommit": "pretty-quick --staged",
+    "prettier:write": "prettier --write **/*.{ts,js}"
   },
   "repository": {
     "type": "git",
