@@ -1,7 +1,5 @@
 /**
- * Predefined commands for bot
- *
- * @typedef {string} CommandNames
+ * Predefined commands for bot.
  */
 export type CommandNames =
   | 'help'

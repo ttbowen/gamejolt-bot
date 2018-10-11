@@ -3,15 +3,15 @@ import { Message, User, Room } from 'gamejolt.js';
 import { Command } from '../Command';
 import { Middleware } from '../../types/Middleware';
 
+/**
+ * Allowed argument types.
+ */
 export type ArgTypeNames = 'User' | 'Room' | 'String' | 'Number' | 'Any' | 'SiteUser' | string[];
 
 /**
- *
- *
- * @export
- * @template T
- * @param {{ [name: string]: ArgTypeNames }} argTypes
- * @returns
+ * Decorator factory for `ICommand#invoke` for asserting that arguments are of
+ * particular types.
+ * @param argTypes The expected argument types.
  */
 export function expect<T extends Command>(argTypes: { [name: string]: ArgTypeNames }): Middleware {
   return async function(this: T, message: Message, args: any[]): Promise<[Message, any[]]> {

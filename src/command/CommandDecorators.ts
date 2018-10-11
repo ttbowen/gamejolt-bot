@@ -1,57 +1,43 @@
 import { Message } from 'gamejolt.js';
+
 import { Command } from './Command';
 import { Middleware } from '../types/Middleware';
 
 /**
- *
- * Set Command 'name' property metadata
- * @export
- * @param {string} value
- * @returns {ClassDecorator}
+ * Set Command 'name' property metadata.
+ * @param value The passed name value to set.
  */
 export function name(value: string): ClassDecorator {
   return _setMetaData('name', value);
 }
 
 /**
- *
  * Set Command 'description' property metadata
- * @export
- * @param {string} value
- * @returns {ClassDecorator}
+ * @param value The passed description value to set.
  */
 export function description(value: string): ClassDecorator {
   return _setMetaData('description', value);
 }
 
 /**
- *
- * Set Command 'aliases' property metadata
- * @export
- * @param {string[]} value
- * @returns {ClassDecorator}
+ * Set Command 'aliases' property metadata.
+ * @param value The passed aliases values to set.
  */
 export function aliases(...value: string[]): ClassDecorator {
   return _setMetaData('aliases', value);
 }
 
 /**
- *
  * Set Command 'usage' property metadata
- * @export
- * @param {string} value
- * @returns {ClassDecorator}
+ * @param value The passed usage value to set.
  */
 export function usage(value: string): ClassDecorator {
   return _setMetaData('usage', value);
 }
 
 /**
- *
- *
- * @export
- * @param {Middleware} func
- * @returns {MethodDecorator}
+ * Middleware decorator.
+ * @param func The middleware function.
  */
 export function using(func: Middleware): MethodDecorator {
   return function(

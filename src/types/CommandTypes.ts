@@ -1,6 +1,4 @@
 /**
- * Predefined command types
- *
- * @typedef {string} CommandTypes
+ * Predefined command types.
  */
 export type CommandTypes = 'useful' | 'fun' | 'manage' | 'moderation' | 'info';

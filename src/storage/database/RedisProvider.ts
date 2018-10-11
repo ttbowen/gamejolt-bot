@@ -17,10 +17,9 @@ export class RedisProvider {
 
   /**
    * Creates an instance of RedisProvider.
-   * @param {number} port Redis port to connect on
-   * @param {string} host Redis hostname
-   * @param {redis.ClientOpts} [clientOptions] Redis client options
-   * @memberof RedisProvider
+   * @param port Redis port to connect on.
+   * @param host Redis hostname.
+   * @param [clientOptions] Redis client options.
    */
   private constructor(port: number, host: string, clientOptions?: redis.ClientOpts) {
     if (RedisProvider._instance)
@@ -35,14 +34,10 @@ export class RedisProvider {
   }
 
   /**
-   *
-   * Singleton. Returns the database instance
-   * @static
-   * @param {number} port
-   * @param {string} host
-   * @param {redis.ClientOpts} clientOptions
-   * @returns {RedisProvider}
-   * @memberof RedisProvider
+   * Returns the database instance.
+   * @param port The redis server port.
+   * @param host The redis host.
+   * @param [clientOptions] The client options.
    */
   public static instance(
     port?: number,
@@ -61,13 +56,7 @@ export class RedisProvider {
   }
 
   /**
-   *
-   * Initialise the redis instance
-   * @param {number} port
-   * @param {string} host
-   * @param {redis.ClientOpts} [clientOptions]
-   * @returns {Promise<void>}
-   * @memberof RedisProvider
+   * Initialise the redis instance.
    */
   public async init(): Promise<void> {
     if (!this._options) this.client = redis.createClient(this._port, this._host);
@@ -89,11 +78,8 @@ export class RedisProvider {
   }
 
   /**
-   *
    * Get redis keys.
-   * @param {string} [pattern]
-   * @returns {Promise<any>}
-   * @memberof RedisProvider
+   * @param [pattern] Get key with matching pattern.
    */
   public async keys(pattern?: string): Promise<any> {
     if (!pattern) pattern = '*';
@@ -108,23 +94,17 @@ export class RedisProvider {
   }
 
   /**
-   *
-   * Get a redis key
-   * @param {string} key
-   * @returns {Promise<any>}
-   * @memberof RedisProvider
+   * Get a redis key.
+   * @param key The name of the key to get.
    */
   public async get(key: string): Promise<any> {
     return this.client.getAsync(key);
   }
 
   /**
-   *
-   * Set a redis key
-   * @param {string} key
-   * @param {*} value
-   * @returns {Promise<any>}
-   * @memberof RedisProvider
+   * Set a redis key.
+   * @param key The name of the key to set.
+   * @param value The value to set.
    */
   public async set(key: string, value: any): Promise<any> {
     return this.client
@@ -137,13 +117,10 @@ export class RedisProvider {
   }
 
   /**
-   *
-   * Set a redis key with a time-to-live value
-   * @param {string} key
-   * @param {*} value
-   * @param {number} ttl
-   * @returns
-   * @memberof RedisProvider
+   * Set a redis key with a time-to-live value.
+   * @param key The key to set.
+   * @param value The value to set.
+   * @param {number} ttl The time to live value for key.
    */
   public async setExpire(key: string, value: any, ttl: number): Promise<any> {
     return this.client
@@ -157,11 +134,8 @@ export class RedisProvider {
   }
 
   /**
-   *
-   * Delete a storage key
-   * @param {string} key
-   * @returns
-   * @memberof RedisProvider
+   * Delete a storage key.
+   * @param key The key to remove.
    */
   public async remove(key: string): Promise<any> {
     return this.client
@@ -174,12 +148,9 @@ export class RedisProvider {
   }
 
   /**
-   *
-   * Push an item to a list
-   * @param {string} list
-   * @param {*} item
-   * @returns
-   * @memberof RedisProvider
+   * Push an item to a list.
+   * @param list The name of the list.
+   * @param item The item to push.
    */
   public async lpush(list: string, item: any): Promise<any> {
     return this.client
@@ -192,11 +163,8 @@ export class RedisProvider {
   }
 
   /**
-   *
-   * Remove last item from a list
-   * @param {string} list
-   * @returns
-   * @memberof RedisProvider
+   * Remove last item from a list.
+   * @param list The name of the list.
    */
   public async lpop(list: string): Promise<any> {
     return this.client
@@ -209,13 +177,10 @@ export class RedisProvider {
   }
 
   /**
-   *
-   * Remove an item from a list
-   * @param {string} list
-   * param {number} count
-   * @param {*} item
-   * @returns
-   * @memberof RedisProvider
+   * Remove an item from a list.
+   * @param list The name of the list.
+   * @param count The number of items to remove.
+   * @param item The item to remove.
    */
   public async listRemove(list: string, count: number, item: any): Promise<any> {
     return this.client
@@ -228,13 +193,10 @@ export class RedisProvider {
   }
 
   /**
-   *
-   * Get a range of items from a list
-   * @param {string} list
-   * @param {number} start
-   * @param {number} stop
-   * @returns {Promise<any>}
-   * @memberof RedisProvider
+   * Get a range of items from a list.
+   * @param list The name of the list.
+   * @param start The start range index.
+   * @param stop The end range index.
    */
   public async listRange(list: string, start: number, stop: number): Promise<any> {
     return this.client
@@ -247,11 +209,8 @@ export class RedisProvider {
   }
 
   /**
-   *
-   * Check if a key exists in redis store
-   * @param {string} key
-   * @returns {Promise<boolean>}
-   * @memberof RedisProvider
+   * Check if a key exists in redis store.
+   * @param key The name of the key.
    */
   public async keyExists(key: string): Promise<boolean> {
     return this.client
@@ -264,12 +223,9 @@ export class RedisProvider {
   }
 
   /**
-   *
    * Save a hash to redis
-   * @param {string} hash
-   * @param {*} object
-   * @returns {Promise<any>}
-   * @memberof RedisProvider
+   * @param hash The hash.
+   * @param object The object to save.
    */
   public async hmset(hash: string, object: any): Promise<any> {
     return this.client
@@ -282,11 +238,8 @@ export class RedisProvider {
   }
 
   /**
-   *
    * Retrieve a hash from redis
-   * @param {string} hash
-   * @returns {Promise<any>}
-   * @memberof RedisProvider
+   * @param hash The hash to get.
    */
   public async hget(hash: string): Promise<any> {
     return this.client
@@ -299,11 +252,8 @@ export class RedisProvider {
   }
 
   /**
-   *
-   * Get all fields from redis hash
-   * @param {string} key
-   * @returns {Promise<any>}
-   * @memberof RedisProvider
+   * Get all fields from redis hash.
+   * @param key The key to get.
    */
   public async hgetall(key: string): Promise<any> {
     return this.client

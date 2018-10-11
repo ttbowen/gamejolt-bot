@@ -1,50 +1,17 @@
 /**
  * Represents a timestamp in days
- * in days, hours, minutes, seconds and miliseconds
- *
- * @type {Time}
+ * in days, hours, minutes, seconds and miliseconds.
  */
 export class Time {
-  /**
-   *
-   * Days time part
-   *
-   * @type {number}
-   */
   public days: number;
-
-  /**
-   *
-   * Hours time part
-   *
-   * @type {number}
-   */
   public hours: number;
-
-  /**
-   *
-   * Minutes time part
-   *
-   * @type {number}
-   */
   public minutes: number;
-
-  /**
-   *
-   * Seconds time part
-   *
-   * @type {number}
-   */
   public seconds: number;
-
-  /**
-   *
-   * Miliseconds time part
-   *
-   * @type {number}
-   */
   public miliseconds: number;
 
+  /**
+   * Return string representation of time object.
+   */
   public toString(): string {
     let timeStr: string = '';
 

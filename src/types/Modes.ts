@@ -1,6 +1,4 @@
 /**
- * Predefined bot modes
- *
- * @typedef {string} Modes
+ * Predefined bot modes.
  */
 export type Modes = 'serious' | 'fun' | 'quiet' | 'chatty';

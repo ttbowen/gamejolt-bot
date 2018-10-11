@@ -1,3 +1,4 @@
+import { Message, User } from 'gamejolt.js';
 import * as nconf from 'nconf';
 
 import { Client } from '../core/client/Client';
@@ -10,42 +11,27 @@ import { Middleware } from '../types/Middleware';
 import { RedisProvider } from '../storage/database/RedisProvider';
 import { ExtraHelp } from '../types/ExtraHelp';
 
-import { Message, User } from 'gamejolt.js';
-
 /**
- *
- * Represents a generic bot command
- * @export
- * @abstract
- * @class Command
- * @implements {ICommand<T>}
- * @template T
- * @template Client
+ * Represents a generic bot command.
  */
 export abstract class Command<T extends Client = Client> implements ICommand<T> {
+  /**
+   * Reference to the bot client.
+   */
   public client: T;
 
   /**
-   *
-   * The name of the command
-   * @type {string}
-   * @memberof Command
+   * The name of the command.
    */
   public name: string;
 
   /**
-   *
-   * Information about the command
-   * @type {string}
-   * @memberof Command
+   * Information about the command.
    */
   public description: string;
 
   /**
-   *
-   * Command Usage help
-   * @type {string}
-   * @memberof Command
+   * Command Usage help.
    */
   public usage: string;
 
@@ -58,87 +44,55 @@ export abstract class Command<T extends Client = Client> implements ICommand<T> 
   public extraHelp: ExtraHelp[];
 
   /**
-   *
-   * Type of command
-   * @type {CommandTypes}
-   * @memberof Command
+   * Type of command.
    */
   public type: CommandTypes;
 
   /**
-   *
-   * Aliases for command name
-   * @type {string[]}
-   * @memberof Command
+   * Alternative names for the command.
    */
   public aliases: string[];
 
   /**
-   *
-   * Character to separate command arguments
-   * @type {string}
-   * @memberof Command
+   * Character to separate command arguments.
    */
   public argSeparator: string;
 
   /**
-   *
-   * The command permission Level
-   * @type {Permissions}
-   * @readonly
-   * @memberof Command
+   * The command permission Levels.
+   * Only the permissions contained here will run this command.
    */
   public readonly permissionLevels: Permissions[];
 
   /**
-   *
-   * Bot owner command
-   * @type {boolean}
-   * @readonly
-   * @memberof Command
+   * Whether this is an owner only command.
    */
   public readonly ownerOnly: boolean;
 
   /**
-   *
-   * Rate limiting instance
-   * @type {CommandRateLimiter}
-   * @readonly
-   * @memberof Command
+   * Rate limiting instance.
    */
   public readonly rateLimiter: CommandRateLimiter;
 
   /**
-   *
-   * Specifies the command location
-   * @type {string}
-   * @memberof Command
+   * Specifies the command location.
    */
   public commandLoc: string;
 
   /**
-   *
-   * Collection of command middleware
-   * @type {Middleware[]}
-   * @memberof Command
+   * Collection of command middleware.
    */
   public middleware: Middleware[];
 
   /**
-   *
    * Specifies if the command can only
-   * be used in Private chats
-   * @type {boolean}
-   * @memberof Command
+   * be used in Private chats.
    */
   public pmOnly: boolean;
 
   /**
-   *
    * Specifies whether the cooldown should be ignored
-   * for this command
-   * @type {boolean}
-   * @memberof Command
+   * for this command.
    */
   public ignoreCooldown: boolean;
 
@@ -146,18 +100,15 @@ export abstract class Command<T extends Client = Client> implements ICommand<T> 
 
   /**
    * Creates an instance of Client.
-   *
-   * @param {CommandOptions} info Command options and settings
-   * @param {string} [name] The name of the command
-   * @param {string} [description] Information about the command
-   * @param {CommandTypes} [type] Type of command
-   * @param {number} [permissionLevel] Permission Level users must have to use this command
-   * @param {string} [usage] How to use the command
-   * @param {string} [argSeparator] Character delimiter that separates command arguments
-   * @param {string[]} [ownerIds] Aliases for command name
-   * @param {boolean} [ownerOnly] Flag if this an owner only command
-   *
-   * @memberof Command
+   * @param info Command options and settings.
+   * @param [name] The name of the command
+   * @param [description] Information about the command
+   * @param [type] Type of command
+   * @param [permissionLevel] Permission Level users must have to use this command
+   * @param [usage] How to use the command
+   * @param [argSeparator] Character delimiter that separates command arguments
+   * @param [ownerIds] Aliases for command name
+   * @param [ownerOnly] Flag if this an owner only command
    */
   public constructor(info: CommandOptions) {
     this.name = info.name;
@@ -179,22 +130,15 @@ export abstract class Command<T extends Client = Client> implements ICommand<T> 
   }
 
   /**
-   *
-   * Invoke the command action
-   * @abstract
-   * @param {Message} message
-   * @param {any[]} [args]
-   *
-   * @memberof Command
+   * Invoke the command action.
+   * @param message The message object invoking the command.
+   * @param [args] Command arguments.
    */
   public abstract invoke(message: Message, args?: any[]): void;
 
   /**
-   *
-   * Register new command
-   * @param {T} client
-   *
-   * @memberof Command
+   * Register a new command.
+   * @param client The bot client.
    */
   public register(client: T): void {
     this.client = client;
@@ -212,11 +156,8 @@ export abstract class Command<T extends Client = Client> implements ICommand<T> 
   }
 
   /**
-   *
-   * Add middleware handler to command
-   * @param {Middleware} func
-   * @returns {this}
-   * @memberof Client
+   * Add middleware handler to command.
+   * @param func The middleware function.
    */
   public use(func: Middleware): this {
     this.middleware.push(func);

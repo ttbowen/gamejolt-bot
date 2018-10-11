@@ -5,35 +5,30 @@ import { Client } from '../core/client/Client';
 import { Command } from './Command';
 
 /**
- *
- * Load command modules and plugins
- * @export
- * @class CommandLoader
- * @template T
+ * Load command modules and plugins.
  */
 export class CommandLoader<T extends Client> {
   private _loadedCommands: number;
   private _client: T;
 
+  /**
+   * Creates an instance of CommandLoader.
+   * @param client The bot client.
+   */
   public constructor(client: T) {
     this._client = client;
     this._loadedCommands = 0;
   }
 
   /**
-   *
-   * Get loaded command count
-   * @readonly
-   *
-   * @memberof CommandLoader
+   * Get loaded command count.
    */
   public get loadedCommands(): number {
     return this._loadedCommands;
   }
 
   /**
-   * Find and load commands from command directories
-   * @memberof CommandLoader
+   * Find and load commands from command directories.
    */
   public loadCommands(): void {
     if (this._client.commands.size > 0) {
@@ -61,12 +56,8 @@ export class CommandLoader<T extends Client> {
   }
 
   /**
-   *
-   * Reload the specified command by name or alias
-   * @param {string} command
-   * @returns {boolean}
-   *
-   * @memberof CommandLoader
+   * Reload the specified command by name or alias.
+   * @param command The name of the command to reload.
    */
   public reloadCommand(command: string): boolean {
     const name: string = this._client.commands.findByNameOrAlias(command).name;

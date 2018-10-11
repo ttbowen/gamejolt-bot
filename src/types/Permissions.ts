@@ -1,8 +1,5 @@
 /**
- *
- * Defines user permissions
- * @export
- * @enum {number}
+ * Defines user permissions.
  */
 export enum Permissions {
   USER,

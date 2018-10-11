@@ -3,25 +3,19 @@ import { ConsoleLogger } from '../../util/logger/ConsoleLogger';
 import Sequelize = require('sequelize');
 
 /**
- *
  * Handles sequelize database connections and stores connection instance
- * @export
- * @class Database
  */
 export class SequelizeDatabase {
   private readonly logger: ConsoleLogger = ConsoleLogger.instance;
 
   /**
-   * The sequelize database client
-   * @type {Sequelize}
-   * @memberof Database
+   * The sequelize database client.
    */
   public readonly db: Sequelize.Sequelize;
 
   /**
    * Creates an instance of Database.
-   * @param {string} [url] The database connection string
-   * @memberof Database
+   * @param [url] The database connection string.
    */
   private constructor(url?: string) {
     if (SequelizeDatabase._instance)
@@ -53,10 +47,7 @@ export class SequelizeDatabase {
   }
 
   /**
-   *
-   * Authenticate connection to database
-   * @returns {Promise<void>}
-   * @memberof Database
+   * Authenticate connection to database.
    */
   public async init(): Promise<void> {
     try {

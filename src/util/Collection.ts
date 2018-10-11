@@ -1,11 +1,5 @@
 /**
- *
- * Utility class for Map Collection Type
- * @export
- * @class Collection
- * @extends {Map<K, V>}
- * @template K
- * @template V
+ * Utility class for Map Collection Type.
  */
 export class Collection<K, V> extends Map<K, V> {
   private _array: any[];
@@ -13,21 +7,27 @@ export class Collection<K, V> extends Map<K, V> {
 
   /**
    * Creates an instance of Collection.
-   *
-   * @param {Iterable<[K, V]>} iterable
-   *
-   * @memberof Collection
+   * @param iterable The iterable.
    */
   public constructor(iterable?: Iterable<[K, V]>) {
     super(iterable);
   }
 
+  /**
+   * Set a value in the collection.
+   * @param key The key name.
+   * @param value The value to set.
+   */
   public set(key: K, value: V): this {
     this._array = null;
     this._keyArray = null;
     return super.set(key, value);
   }
 
+  /**
+   * Deletes a key from collection.
+   * @param key The key to delete.
+   */
   public delete(key: K): boolean {
     this._array = null;
     this._keyArray = null;
@@ -46,12 +46,8 @@ export class Collection<K, V> extends Map<K, V> {
   }
 
   /**
-   *
-   * Obtains the first value in this collection
-   * @param {number} count
-   * @returns {Array<any>}
-   *
-   * @memberof Collection
+   * Obtains the first value in this collection.
+   * @param count
    */
   public first(count?: number): any | any[] {
     if (count === undefined) return this.values().next().value;
@@ -66,9 +62,9 @@ export class Collection<K, V> extends Map<K, V> {
 
   /**
    * Searches for a single item where it's specified property's value
-   * is identical to the passed value
-   * @param {(string|Function)} propOrFn
-   * @param {*} value
+   * is identical to the passed value.
+   * @param propOrFn
+   * @param value
    *
    * @memberof Collection
    */
@@ -89,14 +85,10 @@ export class Collection<K, V> extends Map<K, V> {
   }
 
   /**
-   *
    * Search for all items where their specified property value is
-   * identical to the passed value
-   * @param {string} prop
-   * @param {*} value
-   * @returns {any[]}
-   *
-   * @memberof Collection
+   * identical to the passed value.
+   * @param prop The property to search.
+   * @param value The value to search.
    */
   public findAll(prop: string, value: any): any[] {
     const results: any[] = [];
@@ -111,11 +103,9 @@ export class Collection<K, V> extends Map<K, V> {
 
   /**
    * Searches for the key of a single item where it's specified property's value
-   * is identical to the passed value
-   * @param {(string|Function)} propOrFn
-   * @param {*} value
-   *
-   * @memberof Collection
+   * is identical to the passed value.
+   * @param propOrFn
+   * @param value
    */
   public findKey(propOrFn: string | Function, value: any) {
     if (typeof propOrFn === 'string') {
@@ -135,12 +125,8 @@ export class Collection<K, V> extends Map<K, V> {
   }
 
   /**
-   *
-   * Obtains the last value in this collection
-   * @param {number} count
-   * @returns {any[]}
-   *
-   * @memberof Collection
+   * Obtains the last value in this collection.
+   * @param count
    */
   public last(count: number): any[] {
     const arr = this.array();
@@ -149,12 +135,8 @@ export class Collection<K, V> extends Map<K, V> {
   }
 
   /**
-   *
-   * Obtains the last key in this collection
-   * @param {number} count
-   * @returns {any[]}
-   *
-   * @memberof Collection
+   * Obtains the last key in this collection.
+   * @param count
    */
   public lastKey(count: number): any[] {
     const arr = this.keyArray();
@@ -163,12 +145,8 @@ export class Collection<K, V> extends Map<K, V> {
   }
 
   /**
-   *
-   * Conbines collections into a new collection
-   * @param {...Collection[]} collections
-   * @returns {Collection}
-   *
-   * @memberof Collection
+   * Conbines collections into a new collection.
+   * @param collections Collections to concat.
    */
   public concat(...collections: Collection<K, V>[]): Collection<K, V> {
     const collection: Collection<K, V> = this.clone();
@@ -190,26 +168,18 @@ export class Collection<K, V> extends Map<K, V> {
   }
 
   /**
-   *
-   * Checks if specified item exists in the collection
-   * @param {string} prop
-   * @param {*} value
-   * @returns {boolean}
-   *
-   * @memberof Collection
+   * Checks if specified item exists in the collection.
+   * @param prop The property to check.
+   * @param value The value to check.
    */
   public exists(prop: string, value: any): boolean {
     return Boolean(this.find(prop, value));
   }
 
   /**
-   *
-   * Filter collection items
-   * @param {Function} fn
-   * @param {object} thisArg
-   * @returns {Collection<K, V>}
-   *
-   * @memberof Collection
+   * Filter collection items.
+   * @param fn Predicate function.
+   * @param thisArg
    */
   public filter(fn: Function, thisArg?: object): Collection<K, V> {
     if (thisArg) fn = fn.bind(thisArg);
@@ -220,15 +190,6 @@ export class Collection<K, V> extends Map<K, V> {
     return results;
   }
 
-  /**
-   *
-   * Filter array items
-   * @param {Function} fn
-   * @param {object} thisArg
-   * @returns {any[]}
-   *
-   * @memberof Collection
-   */
   public filterArray(fn: Function, thisArg?: object): any[] {
     if (thisArg) fn = fn.bind(thisArg);
     const results: any[] = [];
@@ -239,15 +200,6 @@ export class Collection<K, V> extends Map<K, V> {
     return results;
   }
 
-  /**
-   *
-   *
-   * @param {Function} fn
-   * @param {object} thisArg
-   * @returns {any[]}
-   *
-   * @memberof Collection
-   */
   public map(fn: Function, thisArg?: object): any[] {
     if (thisArg) fn = fn.bind(thisArg);
     const arr = new Array(this.size);
@@ -258,15 +210,6 @@ export class Collection<K, V> extends Map<K, V> {
     return arr;
   }
 
-  /**
-   *
-   *
-   * @param {Function} fn
-   * @param {object} thisArg
-   * @returns {boolean}
-   *
-   * @memberof Collection
-   */
   public some(fn: Function, thisArg?: object): boolean {
     if (thisArg) fn = fn.bind(thisArg);
     for (const [key, value] of this) {
@@ -275,15 +218,6 @@ export class Collection<K, V> extends Map<K, V> {
     return false;
   }
 
-  /**
-   *
-   *
-   * @param {Function} fn
-   * @param {object} thisArg
-   * @returns {boolean}
-   *
-   * @memberof Collection
-   */
   public every(fn: Function, thisArg?: object): boolean {
     if (thisArg) fn = fn.bind(thisArg);
     for (const [key, value] of this) {
@@ -293,11 +227,7 @@ export class Collection<K, V> extends Map<K, V> {
   }
 
   /**
-   *
-   * Delete all items in the collection
-   * @returns {Promise<any>[]}
-   *
-   * @memberof Collection
+   * Delete all items in the collection.
    */
   public deleteAll(): Promise<any>[] {
     const returns: any = [];
@@ -309,13 +239,9 @@ export class Collection<K, V> extends Map<K, V> {
   }
 
   /**
-   *
    * Checks if this collection shares identical key-value pairings with
-   * another collection
-   * @param {Collection<K, V>} collection
-   * @returns {boolean}
-   *
-   * @memberof Collection
+   * another collection.
+   * @param collection The collection to compare to.
    */
   public equals(collection: Collection<K, V>): boolean {
     if (!collection) return false;

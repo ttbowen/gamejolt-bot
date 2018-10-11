@@ -21,86 +21,53 @@ import { RedisProvider } from '../../storage/database/RedisProvider';
 const { on, once, registerListeners } = ListenerDecorators;
 
 /**
- *
  * The bot client which provides access to chat and api.
- * This extends the gamejolt.js Client functionality
- *
- * @export
- * @class Client
- * @extends {GameJolt.Client}
+ * This extends the gamejolt.js Client functionality.
  */
 export class Client extends GameJolt.Client {
   /**
-   *
-   * The name of the bot
-   * @type {string}
-   * @memberof Client
+   * The name of the bot.
    */
   public readonly name: string;
 
   /**
-   *
-   * The version of the bot
-   * @type {string}
-   * @memberof Client
+   * The version of the bot.
    */
   public readonly version: string;
 
   /**
-   *
-   * Owner Ids for this bot
-   * @type {number[]}
-   * @memberof Client
+   * Owner Ids for this bot.
    */
   public readonly owners: number[];
 
   /**
-   *
-   * Command directory path
-   * Bot commands should be located here
-   * @type {string}
-   * @memberof Client
+   * Command directory path. Bot commands should be located here
    */
   public readonly commandDir: string;
 
   /**
-   *
    * Bot configurations including login config
-   * should be loaded here
-   * @type {string}
-   * @memberof Client
+   * should be loaded here.
    */
   public readonly configPath: string;
 
   /**
-   *
-   * Bot command collection
-   * @type {CommandStorage<this, string, Command<this>>}
-   * @memberof Client
+   * Contains all loaded commands.
    */
   public readonly commands: CommandStorage<this, string, Command<this>>;
 
   /**
-   *
-   * Flag whether to accept friend requests
-   * @type {boolean}
-   * @memberof Client
+   * Flag whether to accept friend requests.
    */
   public acceptFriendRequests: boolean;
 
   /**
-   *
-   * Rate interval to accept friend requests
-   * @type {number}
-   * @memberof Client
+   * Rate interval to accept friend requests.
    */
   public acceptRate: number;
 
   /**
-   *
-   * Is Client paused
-   * @type {boolean}
-   * @memberof Client
+   * Flags whether the Client is paused.
    */
   public pause: boolean;
 
@@ -117,23 +84,19 @@ export class Client extends GameJolt.Client {
 
   /**
    * Creates an instance of Client.
-   *
-   * @param {BotOptions} botOptions Bot Options
-   * @param {number} [acceptFriendRequestInterval=10000] The rate to accept friend requests in milliseconds
-   * @param {boolean} [acceptFriendRequests=false] Flag whether to accept friend requests
-   * @param {string} [commandsDir] Directory command modules are located
-   * @param {string} [configPath] Path to bot configurations
-   * @param {number[]} [defaultRooms] Default rooms to join on startup
-   * @param {string} [defaultPrefix] Default bot prefix
-   * @param {string} [name] The name of the bot
-   * @param {number[]} [ownerIds] Owner user Id numbers
-   * @param {string} [version] The current bot version
-   *
-   * @param {ClientOptions} clientOptions gamejolt.js Client Options
-   * @param  {number} [countInterval] Interval to get friend and notification count
-   * @param {number} [friendRequestInterval] Interval to fetch friend requests
-   *
-   * @memberof Client
+   * @param botOptions Bot Options.
+   * @param [acceptFriendRequestInterval=10000] The rate to accept friend requests in milliseconds.
+   * @param [acceptFriendRequests=false] Flag whether to accept friend requests.
+   * @param [commandsDir] Directory command modules are located.
+   * @param [configPath] Path to bot configurations.
+   * @param [defaultRooms] Default rooms to join on startup.
+   * @param [defaultPrefix] Default bot prefix.
+   * @param [name] The name of the bot.
+   * @param [ownerIds] Owner user Id numbers.
+   * @param [version] The current bot version.
+   * @param clientOptions gamejolt.js Client Options.
+   * @param  [countInterval] Interval to get friend and notification count.
+   * @param [friendRequestInterval] Interval to fetch friend requests.
    */
   public constructor(botOptions: BotOptions, clientOptions?: ClientOptions) {
     super(clientOptions);
@@ -185,23 +148,17 @@ export class Client extends GameJolt.Client {
   }
 
   /**
-   *
-   * Check if the bot is in serious mode
-   * @param {number} roomId
-   * @returns {Promise<boolean>}
-   * @memberof Client
+   * Check if the bot is in serious mode.
+   * @param roomId The id of the room to check.
    */
   public async isSerious(roomId: number): Promise<boolean> {
     return (await this._redis.get(`mode::${roomId}`)) === 'serious';
   }
 
   /**
-   * Checks if the passed user is an owners
-   * of this bot instance
-   * @param {User} user
-   * @returns {boolean}
-   *
-   * @memberof Client
+   * Checks if the passed user is an owner
+   * of this bot instance.
+   * @param user The user object.
    */
   public async isOwner(user: User): Promise<boolean> {
     for (const owner of this.owners) {
@@ -211,11 +168,7 @@ export class Client extends GameJolt.Client {
   }
 
   /**
-   *
-   * Start the bot instance
-   * @returns {this}
-   *
-   * @memberof Client
+   * Start the bot instance.
    */
   public start(): this {
     const config = require(this.configPath);
@@ -228,22 +181,16 @@ export class Client extends GameJolt.Client {
   }
 
   /**
-   *
-   * Get room prefix
-   * @param {number} roomId
-   * @returns {Promise<string>}
-   * @memberof Client
+   * Get room prefix.
+   * @param roomId The id of the room.
    */
   public async getPrefix(roomId: number): Promise<string> {
     return (await this._redis.get(`prefix::${roomId}`)) || this.defaultPrefix;
   }
 
   /**
-   *
-   * Get the current room mode
-   * @param {number} roomId
-   * @returns {promise<string>}
-   * @memberof Client
+   * Get the current room mode.
+   * @param roomId The id of the room.
    */
   public async getCurrentMode(roomId: number): Promise<string> {
     let exists = await this._redis.keyExists(`mode::${roomId}`);
@@ -253,13 +200,7 @@ export class Client extends GameJolt.Client {
   }
 
   /**
-   *
-   * Enter default chat rooms when bot loads
-   * @private
-   * @param {number[]} rooms
-   * @returns {Promise<void>}
-   *
-   * @memberof Client
+   * Enter default chat rooms when bot loads.
    */
   private async _enterDefaultRooms(): Promise<void> {
     for (let room of this._defaultRooms) {
@@ -286,9 +227,7 @@ export class Client extends GameJolt.Client {
 
   /**
    * Reload a command or pass 'all' to reload all commands
-   * @param {string} command The command to reload.
-   *
-   * @memberof Client
+   * @param command The command to reload.
    */
   public reloadCommand(command: string): void {
     if (!command)
@@ -299,11 +238,8 @@ export class Client extends GameJolt.Client {
   }
 
   /**
-   *
-   * Add middleware function to client
-   * @param {Middleware} func
-   * @returns {this}
-   * @memberof Client
+   * Add middleware function to client.
+   * @param func The middleware function to use.
    */
   public use(func: Middleware): this {
     this.middleware.push(func);
@@ -322,11 +258,9 @@ export class Client extends GameJolt.Client {
   }
 
   /**
-   * Checks if the user is blacklisted
-   * @param {User} user
-   * @param {number} [roomId]
-   * @returns {Promise<boolean>}
-   * @memberof Client
+   * Checks if the user is blacklisted.
+   * @param user The user object.
+   * @param [roomId] The id of the room to check blacklist.
    */
   public async isBlacklisted(user: User, roomId?: number): Promise<boolean> {
     if (roomId) {
@@ -350,8 +284,6 @@ export class Client extends GameJolt.Client {
     }
     return false;
   }
-
-  //#region Gamejolt.js events
 
   public on(event: 'clear-notifications', listener: (data: any) => void): this;
   public on(event: 'connected', listener: (user: User) => void): this;
@@ -384,9 +316,6 @@ export class Client extends GameJolt.Client {
   public on(event: 'public-rooms', listener: (rooms: Room[]) => void): this;
   public on(event: 'you-updated', listener: (oldUser: User, user: User) => void): this;
   public on(event: 'you-leave-room', listener: (data: any) => void): this;
-
-  //#endregion
-
   public on(event: 'continue', listener: () => void);
   public on(event: 'pause', listener: () => void);
   public on(event: 'client-ready', listener: () => void): this;
@@ -396,33 +325,10 @@ export class Client extends GameJolt.Client {
   ): this;
 
   /**
-   *
-   * Emitted when the client is ready
-   * @event event:client-ready
-   * @memberof Client
+   * Setup a new event listener.
+   * @param event The event name.
+   * @param listener The listener callback when event fires.
    */
-
-  /**
-   *
-   * Emitted when a bot command is dipatched
-   * @event event:command
-   * @memberof Client
-   */
-
-  /**
-   *
-   * Emitted when bot is paused
-   * @event event:puase
-   * @memberof Client
-   */
-
-  /**
-   *
-   * Emitted when bot is unpaused
-   * @event event:continue
-   * @memberof Client
-   */
-
   public on(event: string, listener: Function): this {
     return super.on(event, listener);
   }

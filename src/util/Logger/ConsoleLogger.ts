@@ -5,11 +5,7 @@ import * as colour from 'colour';
 import * as moment from 'moment';
 
 /**
- *
- * Log data to the console
- * @export
- * @class ConsoleLogger
- * @implements {Logger}
+ * Log data to the console.
  */
 export class ConsoleLogger implements Logger {
   private static _instance: ConsoleLogger;
@@ -30,12 +26,7 @@ export class ConsoleLogger implements Logger {
   }
 
   /**
-   *
-   * Logger Singleton
-   * @readonly
-   * @static
-   * @type {ConsoleLogger}
-   * @memberof ConsoleLogger
+   * Get logger instance.
    */
   public static get instance(): ConsoleLogger {
     if (!ConsoleLogger._instance) return new ConsoleLogger();
@@ -43,23 +34,17 @@ export class ConsoleLogger implements Logger {
   }
 
   /**
-   *
    * Set the log level the logger will putput
-   * @param {LogLevel} level
-   *
-   * @memberof ConsoleLogger
+   * @param level The log level.
    */
   public setLogLevel(level: LogLevel): void {
     this._logLevel = level;
   }
 
   /**
-   *
-   *
-   * @param {...string[]} text
-   * @returns {Promise<void>}
-   *
-   * @memberof ConsoleLogger
+   * Log to the console.
+   * @param tag The log tag.
+   * @param text The text to log.
    */
   public async log(tag: string, ...text: string[]): Promise<void> {
     if (this._logLevel < ConsoleLogger.INFO) return;
@@ -67,12 +52,9 @@ export class ConsoleLogger implements Logger {
   }
 
   /**
-   *
-   *
-   * @param {string} tag
-   * @param {...string[]} text
-   * @returns {Promise<void>}
-   * @memberof ConsoleLogger
+   * Log as info to the console.
+   * @param tag The log tag.
+   * @param text The text to log.
    */
   public async info(tag: string, ...text: string[]): Promise<void> {
     if (this._logLevel < ConsoleLogger.INFO) return;
@@ -80,12 +62,9 @@ export class ConsoleLogger implements Logger {
   }
 
   /**
-   *
-   *
-   * @param {string} tag
-   * @param {...string[]} text
-   * @returns {Promise<void>}
-   * @memberof ConsoleLogger
+   * Log as debug to the console.
+   * @param tag The log tag.
+   * @param text The text to log.
    */
   public async debug(tag: string, ...text: string[]): Promise<void> {
     if (this._logLevel < ConsoleLogger.DEBUG) return;
@@ -93,12 +72,9 @@ export class ConsoleLogger implements Logger {
   }
 
   /**
-   *
-   *
-   * @param {string} tag
-   * @param {...string[]} text
-   * @returns {Promise<void>}
-   * @memberof ConsoleLogger
+   * Log as warn to the console.
+   * @param tag The log tag.
+   * @param text The text to log.
    */
   public async warn(tag: string, ...text: string[]): Promise<void> {
     if (this._logLevel < ConsoleLogger.WARN) return;
@@ -106,12 +82,9 @@ export class ConsoleLogger implements Logger {
   }
 
   /**
-   *
-   *
-   * @param {string} tag
-   * @param {...string[]} text
-   * @returns {Promise<void>}
-   * @memberof ConsoleLogger
+   * Log as error to the console.
+   * @param tag The log tag.
+   * @param text The text to log.
    */
   public async error(tag: string, ...text: string[]): Promise<void> {
     if (this._logLevel < ConsoleLogger.ERROR) return;

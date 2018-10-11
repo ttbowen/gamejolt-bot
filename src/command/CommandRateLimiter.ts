@@ -4,10 +4,7 @@ import { Collection } from '../util/Collection';
 import { CommandRateLimit } from './CommandRateLimit';
 
 /**
- *
- * Handle ratelimiter objects for chatrooms
- * @export
- * @class CommandRateLimiter
+ * Handle ratelimiter objects for chatrooms.
  */
 export class CommandRateLimiter {
   private readonly _rateLimits: Collection<number, Collection<number, CommandRateLimit>>;
@@ -17,11 +14,8 @@ export class CommandRateLimiter {
 
   /**
    * Creates an instance of CommandRateLimiter.
-   *
-   * @param {number} limit
-   * @param {boolean} global
-   *
-   * @memberof CommandRateLimiter
+   * @param limit Tuple containing ratelimit values.
+   * @param global The the ratelimit is global.
    */
   public constructor(limit: [number, number], global: boolean) {
     this._global = global;
@@ -31,13 +25,9 @@ export class CommandRateLimiter {
   }
 
   /**
-   *
-   * Get rate limit collections
-   * @param {Message} message
-   * @param {User} [userOverride]
-   * @returns {CommandRateLimit}
-   *
-   * @memberof CommandRateLimiter
+   * Get rate limit collections.
+   * @param message The message object.
+   * @param [userOverride] The user object to get rate limit for.
    */
   public get(message: Message, userOverride?: User): CommandRateLimit {
     const user: User = userOverride ? userOverride : message.user;

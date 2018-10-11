@@ -10,13 +10,13 @@ import { RedisProvider } from '../storage/database/RedisProvider';
 import { Message, User } from 'gamejolt.js';
 
 /**
- *
- * Dispatches and invokes bot commands
- * @export
- * @class CommandDispatcher
- * @template T
+ * Dispatches and invokes bot commands.
  */
 export class CommandDispatcher<T extends Client> {
+  /**
+   * Creates an instance of CommandDispatcher.
+   * @param client The bot client.
+   */
   public constructor(client: T) {
     this._client = client;
     this._ready = false;
@@ -29,22 +29,15 @@ export class CommandDispatcher<T extends Client> {
   private _redis: RedisProvider;
 
   /**
-   *
-   * Sets the status of the dispatcher to ready
-   * @memberof CommandDispatcher
+   * Sets the status of the dispatcher to ready.
    */
   public setReady(): void {
     this._ready = true;
   }
 
   /**
-   *
-   * Handle message event
-   * @private
-   * @param {Message} message
-   * @returns {Promise<void>}
-   *
-   * @memberof CommandDispatcher
+   * Handle message event.
+   * @param message The received message object.
    */
   private async handleMessage(message: Message): Promise<void> {
     if (!this._ready) return;
@@ -119,13 +112,8 @@ export class CommandDispatcher<T extends Client> {
   }
 
   /**
-   *
-   * Check if command has been called by a user
-   * @private
-   * @param {Message} message
-   * @returns {Promise<[boolean, Command<T>, string, string]>}
-   *
-   * @memberof CommandDispatcher
+   * Check if command has been called by a user.
+   * @param message The message object.
    */
   private async isCommandCalled(message: Message): Promise<[boolean, Command<T>, string, string]> {
     const prefixes: string[] = [`!`];
@@ -211,6 +199,11 @@ export class CommandDispatcher<T extends Client> {
     return false;
   }
 
+  /**
+   * Get the callers permissions.
+   * @param command The command object.
+   * @param message The message object.
+   */
   private checkCallerPermissions(command: Command<T>, message: Message): Permissions[] {
     let permissions: Permissions[] = [];
 
@@ -228,14 +221,9 @@ export class CommandDispatcher<T extends Client> {
   }
 
   /**
-   *
-   * Check command caller permissions
-   * @private
-   * @param {Command<T>} command
-   * @param {Message} message
-   * @returns {Promise<boolean>}
-   *
-   * @memberof CommandDispatcher
+   * Check command caller permissions.
+   * @param command The command object to check permissions for.
+   * @param message The message object.
    */
   private checkPermissions(command: Command<T>, message: Message): boolean {
     let permissions: Permissions[] = this.checkCallerPermissions(command, message);
@@ -249,15 +237,10 @@ export class CommandDispatcher<T extends Client> {
   }
 
   /**
-   *
-   * Invoke the command action
-   * @private
-   * @param {Command<T>} command
-   * @param {Message} message
-   * @param {any[]} args
-   * @returns {Promise<any>}
-   *
-   * @memberof CommandDispatcher
+   * Invoke the command action.
+   * @param command The command object to invoke.
+   * @param message The message object.
+   * @param args The command arguments to pass.
    */
   private async dispatch(command: Command<T>, message: Message, args: any[]): Promise<any> {
     return new Promise((resolve, reject) => {

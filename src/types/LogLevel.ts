@@ -1,8 +1,5 @@
 /**
- *
- * Defines different log levels for logger
- * @export
- * @enum {number}
+ * Defines different log levels for logger.
  */
 export enum LogLevel {
   NONE,

@@ -5,11 +5,7 @@ import { Permissions } from '../types/Permissions';
 import { Message, User } from 'gamejolt.js';
 
 /**
- *
- * Provides a common interface for all command types
- * @export
- * @interface ICommand
- * @template T
+ * Provides a common interface for all command types.
  */
 export interface ICommand<T extends Client> {
   client: T;

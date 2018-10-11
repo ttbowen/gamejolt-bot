@@ -3,20 +3,7 @@ import { Permissions } from './Permissions';
 import { ExtraHelp } from './ExtraHelp';
 
 /**
- * Options that are provided to a Command
- *
- * @typedef {object} CommandOptions
- * @property {string} [name] The name of the command
- * @property {string} [description] Description of the command
- * @property {string} [usage] Usage instructions for command
- * @property {number} [permissionLevel] Command permission level
- * @property {CommandTypes} [type] The command type
- * @property {ExtraHelp} [extraHelp] Extra command help
- * @property {boolean} [ownerOnly] Owner only command
- * @property {boolean} [pmOnly] Private message command only
- * @property {string[]} [aliases]  Alternative names for command
- * @property {string} [argSeparator] Character to separate args by
- * @property {boolean} [ignoreCooldown] Ignore the cooldown
+ * Options that are provided to a Command.
  */
 export type CommandOptions = {
   name: string;

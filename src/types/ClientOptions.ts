@@ -1,11 +1,5 @@
 /**
- * Options that are provided to the gamejolt.js client constructor
- *
- * @typedef {object} ClientOptions
- * @property {number} [countInterval] Interval to get friend and notification count
- * @property {number} [friendRequestInterval] Interval to fetch friend requests
- * @property {number} [rateLimitRequests]
- * @property {number} [rateLimitDuration]
+ * Options that are provided to the gamejolt.js client constructor.
  */
 export type ClientOptions = {
   countInterval?: number;

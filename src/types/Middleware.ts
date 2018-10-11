@@ -1,9 +1,7 @@
 import { Message } from 'gamejolt.js';
 
 /**
- *
- * Middleware function definition
- * @typedef {Middleware}
+ * Middleware function definition.
  */
 export type Middleware = (
   message: Message,

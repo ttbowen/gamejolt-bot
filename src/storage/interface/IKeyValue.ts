@@ -1,8 +1,5 @@
 /**
- *
- * Interface for key/value stores
- * @export
- * @interface IKeyValue
+ * Interface for key/value stores.
  */
 export interface IKeyValue {
   init(): Promise<void>;

@@ -2,20 +2,13 @@ import 'reflect-metadata';
 import { EventEmitter } from 'events';
 
 /**
- *
- * Listener method decorators
- * @export
- * @class ListenerDecorators
+ * Listener method decorators.
  */
 export class ListenerDecorators {
   /**
-   *
    * Register a new event listener
-   * @static
-   * @param {EventEmitter} emitter
-   * @param {object} [listenerSrc]
-   *
-   * @memberof ListenerDecorators
+   * @param emitter The event listener to register.
+   * @param [listenerSrc] Listener source.
    */
   public static registerListeners(emitter: EventEmitter, listenerSrc?: object): void {
     const listenerTarget: object = listenerSrc ? listenerSrc : emitter;
@@ -33,28 +26,18 @@ export class ListenerDecorators {
   }
 
   /**
-   *
-   * On event method decorator
-   * @static
-   * @param {string} event
-   * @param {...any[]} args
-   * @returns {MethodDecorator}
-   *
-   * @memberof ListenerDecorators
+   * On event method decorator.
+   * @param event The event name.
+   * @param args The event arguments.
    */
   public static on(event: string, ...args: any[]): MethodDecorator {
     return ListenerDecorators._setListenerMetadata(event, false, ...args);
   }
 
   /**
-   *
-   * Once event method decorator
-   * @static
-   * @param {string} event
-   * @param {...any[]} args
-   * @returns {MethodDecorator}
-   *
-   * @memberof ListenerDecorators
+   * Once event method decorator.
+   * @param event The event name.
+   * @param args The event arguments.
    */
   public static once(event: string, ...args: any[]): MethodDecorator {
     return ListenerDecorators._setListenerMetadata(event, true, ...args);

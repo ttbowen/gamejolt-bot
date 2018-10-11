@@ -1,16 +1,11 @@
 /**
- *
- * Contains miscellaneous helper methods
- * @export
- * @class Util
+ * Contains miscellaneous helper methods.
  */
 export class Util {
   /**
-   *
-   * Truncate strings after max lengths
-   * @param {number} n Maximum string length before truncating with ...
-   * @param {string} text The string to truncate
-   * @returns {string}
+   * Truncate strings after max lengths.
+   * @param n Maximum string length before truncating with ...
+   * @param text The string to truncate.
    */
 
   public static truncate(n: number, text: string): string {
@@ -18,10 +13,8 @@ export class Util {
   }
 
   /**
-   *
-   * Format number with metric prefix
-   * @param {number} n The number to format
-   * @returns {string}
+   * Format number with metric prefix.
+   * @param n The number to format.
    */
   public static formatNumber(n: number): string {
     const ranges = [

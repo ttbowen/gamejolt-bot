@@ -1,10 +1,5 @@
 /**
- * Options for extra help information
- *
- * @typedef {object} ExtraHelp
- * @property {string} [commandName] The name of the command.
- * @property {string} [description] The description
- * @property {string} [args] The command arguments
+ * Options for extra help information.
  */
 export type ExtraHelp = {
   commandName: string;

@@ -3,14 +3,7 @@ import { Command } from './Command';
 import { Collection } from '../util/Collection';
 
 /**
- *
- * Stores loaded commands in a collection
- * @export
- * @class CommandStorage
- * @extends {Collection<K, V>}
- * @template T
- * @template K
- * @template V
+ * Stores loaded commands in a collection.
  */
 export class CommandStorage<
   T extends Client,
@@ -22,15 +15,11 @@ export class CommandStorage<
   }
 
   /**
-   *
-   * Add a new loaded command to the collection
-   * @param {T} client
-   * @param {V} command
-   * @param {K} key
-   * @param {boolean} reload
-   * @returns {void}
-   *
-   * @memberof CommandStorage
+   * Add a new loaded command to the collection.
+   * @param client The bot client.
+   * @param command The command object to register.
+   * @param key The key to register command under.
+   * @param reload Whether to reload command.
    */
   public register(client: T, command: V, key: K, reload?: boolean): void {
     // Check if this command is already registered
@@ -47,25 +36,16 @@ export class CommandStorage<
   }
 
   /**
-   *
-   * Finds a command by name or alias
-   * @param {string} text The command name or alias
-   * @returns {V}
-   *
-   * @memberof CommandStorage
+   * Finds a command by name or alias.
+   * @param text The command name or alias.
    */
   public findByNameOrAlias(text: string): V {
     return this.filter(c => c.name === text || c.aliases.includes(text)).first();
   }
 
   /**
-   *
-   * Finds commands by type
-   * and returns a collection of found commands
-   * @param {string} text The command type
-   * @returns {V}
-   *
-   * @memberof CommandStorage
+   * Finds commands by type and returns a collection of found commands.
+   * @param text The command type.
    */
   public findByType(text: string): Collection<K, V> {
     return this.filter(c => c.type === text);

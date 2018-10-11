@@ -1,10 +1,7 @@
 import { LogLevel } from '../../../types/LogLevel';
 
 /**
- *
- * Provides an interface for loggers
- * @export
- * @interface Logger
+ * Provides an interface for loggers.
  */
 export interface Logger {
   setLogLevel(level: LogLevel): void;

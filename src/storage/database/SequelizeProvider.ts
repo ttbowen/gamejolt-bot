@@ -8,8 +8,7 @@ export class SequelizeProvider {
 
   /**
    * Creates an instance of SequelizeProvider.
-   * @param {string} [url] The database connection string
-   * @memberof SequelizeProvider
+   * @param [url] The database connection string.
    */
   public constructor(url?: string) {
     this._url = url;
@@ -18,6 +17,9 @@ export class SequelizeProvider {
 
   private sequelize: Sequelize.Sequelize;
 
+  /**
+   * Gets the database instance.
+   */
   public get database(): SequelizeDatabase {
     return this._database;
   }
@@ -34,22 +36,18 @@ export class SequelizeProvider {
   }
 
   /**
-   * Send a raw SQL query to database
-   * @param {string} query
-   * @param {*} [options]
-   * @returns {Promise<any>}
-   * @memberof SequelizeProvider
+   * Send a raw SQL query to database.
+   * @param query The sql query.
+   * @param [options] Sequelize options.
    */
   public async query(query: string, options?: Sequelize.QueryOptions): Promise<any> {
     return this._database.db.query(query, options);
   }
 
   /**
-   *
-   * Define a new model
-   * @param {string} name
-   * @param {Sequelize.DefineAttributes} attributes
-   * @memberof SequelizeProvider
+   * Define a new model.
+   * @param name The name of the model.
+   * @param attributes Model attributes.
    */
   public async defineModel(name: string, attributes: Sequelize.DefineAttributes): Promise<void> {
     this._database.db.define(name, attributes);

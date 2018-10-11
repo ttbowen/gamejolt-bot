@@ -5,15 +5,15 @@ import { Client } from '../../core/client/Client';
 import { Middleware } from '../../types/Middleware';
 import { RoomNames } from '../../types/RoomNames';
 
+/**
+ * Argument types that can be resolved.
+ */
 export type ResolveArgTypeNames = 'User' | 'Room' | 'String' | 'Number' | 'Any' | 'SiteUser';
 
 /**
- *
- * Resolve various types passed to middleware function
- * @export
- * @template T
- * @param {{ [name: string]: ArgTypeNames }} argTypes
- * @returns
+ * Decorator factory for `ICommand#invoke` to resolve arguments to the
+ * correct types.
+ * @param argTypes The argument types to resolve.
  */
 export function resolve<T extends Command>(argTypes: {
   [name: string]: ResolveArgTypeNames;

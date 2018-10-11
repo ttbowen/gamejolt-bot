@@ -1,12 +1,7 @@
 import { IKeyValue } from './interface/IKeyValue';
 
 /**
- *
- * Abstract class for key/value stores
- * @export
- * @abstract
- * @class KeyValue
- * @implements {IKeyValue}
+ * Abstract class for key/value stores.
  */
 export abstract class KeyValue implements IKeyValue {
   public abstract init(): Promise<void>;

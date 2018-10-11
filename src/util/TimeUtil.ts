@@ -1,20 +1,12 @@
 import { Time } from '../types/Time';
 
 /**
- *
- * Contains Time Utility methods
- * @export
- * @class TimeUtil
+ * Contains Time Utility methods.
  */
 export class TimeUtil {
   /**
-   *
-   * Convert timestamp in miliseconds to days, hours, minutes and seconds
-   * @static
-   * @param {number} ms
-   * @returns {Time}
-   *
-   * @memberof TimeUtil
+   * Convert timestamp in miliseconds to days, hours, minutes and seconds.
+   * @param ms Time in milliseconds.
    */
   public static convertMs(ms: number): Time {
     let timestamp: Time;
@@ -39,14 +31,9 @@ export class TimeUtil {
   }
 
   /**
-   *
-   * Get a time difference between two timestamps
-   * @static
-   * @param {number} a
-   * @param {number} b
-   * @returns {Time}
-   *
-   * @memberof TimeUtil
+   * Get a time difference between two timestamps.
+   * @param a The first time.
+   * @param b The second time.
    */
   public static difference(a: number, b: number): Time {
     let difference: Time;
