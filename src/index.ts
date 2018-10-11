@@ -31,6 +31,6 @@ export { TimeUtil } from './util/TimeUtil';
 export { ListenerDecorators } from './util/Listener/ListenerDecorators';
 export { Util } from './util/Util';
 
-export {  name, description, usage, aliases, using } from './command/CommandDecorators';
+export { name, description, usage, aliases, using } from './command/CommandDecorators';
 
 export const version: string = require(path.join(__dirname, '..', 'package')).version;

@@ -1,8 +1,11 @@
 import { Message } from 'gamejolt.js';
 
 /**
- * 
- * Middleware function definition 
+ *
+ * Middleware function definition
  * @typedef {Middleware}
  */
-export type Middleware = (message: Message, args: any[]) => Promise<[Message, any[]]> | [Message, any[]];
+export type Middleware = (
+  message: Message,
+  args: any[]
+) => Promise<[Message, any[]]> | [Message, any[]];

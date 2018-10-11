@@ -4,7 +4,7 @@ import { ExtraHelp } from './ExtraHelp';
 
 /**
  * Options that are provided to a Command
- * 
+ *
  * @typedef {object} CommandOptions
  * @property {string} [name] The name of the command
  * @property {string} [description] Description of the command
@@ -18,17 +18,17 @@ import { ExtraHelp } from './ExtraHelp';
  * @property {string} [argSeparator] Character to separate args by
  * @property {boolean} [ignoreCooldown] Ignore the cooldown
  */
-export type CommandOptions =  {
-    name: string;
-    description: string;
-    usage: string;
-    permissionLevels?: Permissions[];
-    type: CommandTypes;
-    extraHelp?: ExtraHelp[];
-    ownerOnly?: boolean;
-    pmOnly?: boolean;
-    aliases?: string[];
-    argSeparator?: string;
-    rateLimit?: [number, number];
-    ignoreCooldown?: boolean;
-}
+export type CommandOptions = {
+  name: string;
+  description: string;
+  usage: string;
+  permissionLevels?: Permissions[];
+  type: CommandTypes;
+  extraHelp?: ExtraHelp[];
+  ownerOnly?: boolean;
+  pmOnly?: boolean;
+  aliases?: string[];
+  argSeparator?: string;
+  rateLimit?: [number, number];
+  ignoreCooldown?: boolean;
+};
