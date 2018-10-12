@@ -1,6 +1,6 @@
 import { Message } from 'gamejolt.js';
+
 import { Command } from '../../Command';
-import { Permissions } from '../../../types/Permissions';
 
 export default class extends Command {
   public constructor() {
@@ -14,7 +14,6 @@ export default class extends Command {
   }
 
   public async invoke(message: Message): Promise<void> {
-    let version: string = this.client.version;
-    message.reply(`My current version is at: \`${version}\``);
+    return message.reply(`My current version is at: \`${this.client.version}\``);
   }
 }

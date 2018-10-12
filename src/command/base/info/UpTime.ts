@@ -1,8 +1,8 @@
 import { Message } from 'gamejolt.js';
+
 import { Command } from '../../Command';
 import { Time } from '../../../types/Time';
 import { TimeUtil } from '../../../util/TimeUtil';
-import { Permissions } from '../../../types/Permissions';
 
 export default class extends Command {
   public constructor() {
@@ -16,9 +16,7 @@ export default class extends Command {
   }
 
   public async invoke(message: Message): Promise<void> {
-    let uptime: Time;
-
-    uptime = TimeUtil.convertMs(this.client.chat.uptime);
+    const uptime: Time = TimeUtil.convertMs(this.client.chat.uptime);
 
     return message.reply(`I have been up ${uptime.toString()}`);
   }

@@ -1,8 +1,7 @@
-import { Message, Markdown } from 'gamejolt.js';
+import { Message } from 'gamejolt.js';
+
 import { Command } from '../../Command';
-import { CommandTypes } from '../../../types/CommandTypes';
 import { Collection } from '../../../util/Collection';
-import { Permissions } from '../../../types/Permissions';
 
 export default class extends Command {
   public constructor() {

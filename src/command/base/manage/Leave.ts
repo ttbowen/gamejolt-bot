@@ -1,4 +1,5 @@
-import { Message, PublicRooms } from 'gamejolt.js';
+import { Message } from 'gamejolt.js';
+
 import { Command } from '../../Command';
 import { Permissions } from '../../../types/Permissions';
 
@@ -18,7 +19,9 @@ export default class extends Command {
   public async invoke(message: Message): Promise<void> {
     const pm: boolean = message.room.type === 'pm';
 
-    if (pm) message.reply('Cannot leave a Private Message room.');
+    if (pm) {
+      message.reply('Cannot leave a Private Message room.');
+    }
 
     message.reply('Okay Bye Bye.');
     this.client.chat.leaveRoom(message.roomId);

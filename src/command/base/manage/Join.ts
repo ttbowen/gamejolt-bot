@@ -1,8 +1,8 @@
-import { Message, Room, PublicRooms } from 'gamejolt.js';
+import { Message, Room } from 'gamejolt.js';
+
 import { Command } from '../../Command';
 import { resolve } from '../../middleware/Resolve';
 import { using } from '../../CommandDecorators';
-import { Permissions } from '../../../types/Permissions';
 
 export default class extends Command {
   public constructor() {

@@ -1,6 +1,6 @@
 import { Message } from 'gamejolt.js';
+
 import { Command } from '../../Command';
-import { Permissions } from '../../../types/Permissions';
 
 export default class extends Command {
   public constructor() {
@@ -16,9 +16,13 @@ export default class extends Command {
   }
 
   public async invoke(message: Message, [prefix]: [string]): Promise<void> {
-    if (!prefix) return message.reply('Please provide a new prefix.');
+    if (!prefix) {
+      return message.reply('Please provide a new prefix.');
+    }
 
-    if (prefix.length > 8) message.reply('Prefix must be smaller than 8 characters.');
+    if (prefix.length > 8) {
+      message.reply('Prefix must be smaller than 8 characters.');
+    }
 
     this._redis.set(`prefix::${message.roomId}`, prefix);
     return message.reply(`Prefix successfully set.`);

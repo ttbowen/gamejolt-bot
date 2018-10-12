@@ -1,7 +1,7 @@
 import { Message, SiteUser, User } from 'gamejolt.js';
+
 import { Command } from '../../Command';
 import { resolve } from '../../middleware/Resolve';
-import { expect } from '../../middleware/Expect';
 import { using } from '../../CommandDecorators';
 import { Permissions } from '../../../types/Permissions';
 

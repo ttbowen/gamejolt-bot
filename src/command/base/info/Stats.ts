@@ -1,6 +1,6 @@
 import { Message } from 'gamejolt.js';
+
 import { Command } from '../../Command';
-import { Permissions } from '../../../types/Permissions';
 
 export default class extends Command {
   public constructor() {
@@ -20,7 +20,9 @@ export default class extends Command {
   }
 
   public async invoke(message: Message, [command]: [string]): Promise<void> {
-    if (!command) return message.reply('Please enter a command. Use `help stats` for more help');
+    if (!command) {
+      return message.reply('Please enter a command. Use `help stats` for more help');
+    }
 
     command = command.toLowerCase();
 

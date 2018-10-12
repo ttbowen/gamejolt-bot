@@ -1,6 +1,6 @@
 import { Message } from 'gamejolt.js';
+
 import { Command } from '../../Command';
-import { Permissions } from '../../../types/Permissions';
 
 export default class extends Command {
   public constructor() {
@@ -23,8 +23,11 @@ export default class extends Command {
       return message.reply(`'${commandName}' is not a valid command name.`);
     }
 
-    if (command) this.client.reloadCommand(command.name);
-    else this.client.reloadCommand('all');
+    if (command) {
+      this.client.reloadCommand(command.name);
+    } else {
+      this.client.reloadCommand('all');
+    }
 
     const end: [number, number] = process.hrtime(start);
 

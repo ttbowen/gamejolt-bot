@@ -1,7 +1,7 @@
 import { Message, User } from 'gamejolt.js';
+
 import { Command } from '../../Command';
 import { resolve } from '../../middleware/Resolve';
-import { expect } from '../../middleware/Expect';
 import { using } from '../../CommandDecorators';
 import { Permissions } from '../../../types/Permissions';
 
@@ -20,7 +20,9 @@ export default class extends Command {
 
   @using(resolve({ '<user>': 'SiteUser' }))
   public async invoke(message: Message, [user, global]: [User, string]): Promise<void> {
-    if (!user) return message.reply(`Could not find this user.`);
+    if (!user) {
+      return message.reply(`Could not find this user.`);
+    }
 
     // Check for global blacklist
     if (global === 'global') {
